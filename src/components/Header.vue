@@ -4,6 +4,7 @@
       v-for="slide in Slider"
       :key="slide.color"
       :title="slide"
+      interval=6000
     >
       <v-sheet
         :color="slide.color"
