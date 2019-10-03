@@ -30,7 +30,7 @@
 export default {
   data: () => ({
     Slider: [
-      { title: 'Bienvenu sur Voyage Voyage', color: 'primary', src: 'https://i2.wp.com/ravefeed.com/wp-content/uploads/2019/08/IMG_3961.jpg?w=1920&ssl=1' },
+      { title: 'Bienvenue sur Voyage Voyage', color: 'primary', src: 'https://i2.wp.com/ravefeed.com/wp-content/uploads/2019/08/IMG_3961.jpg?w=1920&ssl=1' },
       { title: 'Ici tu peux partager ', color: 'secondary', src: 'https://cdn.pixabay.com/photo/2019/09/25/20/52/sun-4504661__340.jpg' },
       { title: 'tes plus beaux voyage', color: 'primary', src: 'https://cdn.pixabay.com/photo/2019/06/02/17/27/summer-4246927__340.jpg' },
       { title: 'Avec le monde entier', color: 'yellow darken-2', src: 'https://cdn.pixabay.com/photo/2019/09/29/08/57/sea-4512642__340.jpg' }
