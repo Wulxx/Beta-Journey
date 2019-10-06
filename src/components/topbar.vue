@@ -88,10 +88,10 @@
          <v-list-item
           v-for="(item, index) in profilOptions"
           :key="index"
-          @click="showSettings"
+          @click="menuActions(item,index)"
           to:item.route
         >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title>{{ item.title + value}}</v-list-item-title>
             <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -99,7 +99,7 @@
       </v-list>
     </v-menu>
   </div>
-            <v-dialog v-model="dialog" max-width="500px">
+          <v-dialog v-model="dialog" max-width="500px">
           <v-card>
             <v-card-text>
               <v-card-title>
@@ -123,21 +123,23 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+          <settingsForm v-model="showSettingsModel"></settingsForm>
   </v-toolbar>
   </template>
 <script>
-import settings from './settingsForm'
+
+import settingsForm from './settingsForm'
 
 export default {
   name: 'App',
   components: {
-    settings
+    settingsForm
   },
   data: () => ({
     profilOptions: [
-      { title: 'Mon Profile', icon: 'mdi-account-box', action: null },
+      { title: 'Mon Profile', icon: 'mdi-account-box', action: 'profil' },
       { title: 'Paramètres', icon: 'mdi-settings', action: 'showsettings' },
-      { title: 'Déconnexion', icon: 'mdi-cellphone-link-off', action: null }
+      { title: 'Déconnexion', icon: 'mdi-cellphone-link-off', action: 'deco' }
     ],
     notifications: [
       { title: 'Laurent à aimé votre photo' },
@@ -150,15 +152,30 @@ export default {
       { title: 'Marie' }
     ],
     dialog: false,
-    showSettingsModel: true
+    showSettingsModel: false,
+    value: 0
   }),
   methods: {
-    profil: () => {
-      alert('Hello')
+    menuActions: function (el, i) {
+      if (i === 0) {
+        this.profil()
+      }
+      if (i === 1) {
+        this.showSettings()
+      }
+      if (i === 2) {
+        this.deco()
+      }
     },
-    showSettings: () => {
-      alert('settinges')
-      this.showSettingsModel = true
+    profil: function () {
+      this.value = this.value + 1
+      alert('profil')
+    },
+    showSettings: function () {
+      this.showSettingsModel = !this.showSettingsModel
+    },
+    deco: function () {
+      alert('deconnecté')
     }
   }
 }
