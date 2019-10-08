@@ -10,7 +10,7 @@
 export default {
   data: () => (
     {
-      message: 'bonjour'
+      message: 'bonjour '
     }
   )
 }
