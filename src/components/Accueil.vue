@@ -70,13 +70,10 @@
 
 <script>
 
-import Header from './reusedComponents/Header'
-
 export default {
   name: 'App',
   el: '#elements',
   components: {
-    Header
   },
   data: () => ({
     emptyIcon: 'mdi-heart-outline',
