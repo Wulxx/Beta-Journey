@@ -1,7 +1,6 @@
 <template>
     <v-container class="pa-2"
       fluid>
-      <Header/>
       <v-row class="nb-6">
         <v-col
           v-for="(card, index) in items"
@@ -71,7 +70,7 @@
 
 <script>
 
-import Header from './Header'
+import Header from './reusedComponents/Header'
 
 export default {
   name: 'App',

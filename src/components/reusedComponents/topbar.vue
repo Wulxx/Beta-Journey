@@ -1,18 +1,24 @@
   <template>
-  <v-toolbar fixed app light clipped-left color="primary" class="elevation-2">
-    <v-toolbar-side-icon @click="drawer = !drawer"  class="white--text"></v-toolbar-side-icon>
-    <v-toolbar-title class="white--text" to="/home">
+  <v-app-bar
+      absolute
+      color="#fcb69f"
+      dark
+      shrink-on-scroll
+      src="https://picsum.photos/1920/1080?random"
+      scroll-target="#scrolling-techniques-2"
+      height="64px">
+    <v-app-bar-side-icon @click="drawer = !drawer"  class="white--text"></v-app-bar-side-icon>
+    <v-app-bar-title class="white--text" to="/home">
         <v-btn text color="white" to="/home">
       Stourney
       </v-btn>
-      </v-toolbar-title>
-    <img class="mr-3" :src="require('../assets/logo.png')" height="40"/>
+      </v-app-bar-title>
+    <img class="mr-3" :src="require('/Users/alexendreobli/fwd_folder/first-app/src/assets/logo.png')" height="40"/>
            <v-spacer />
         <v-text-field
             label="Recherche"
             solo
             class="searchbar"
-            style="margin-top: 25px"
           ></v-text-field>
 
     <div class="flex-grow-1"></div>
@@ -124,7 +130,8 @@
           </v-card>
         </v-dialog>
           <settingsForm v-model="showSettingsModel"></settingsForm>
-  </v-toolbar>
+  </v-app-bar>
+
   </template>
 <script>
 

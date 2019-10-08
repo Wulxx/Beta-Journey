@@ -1,7 +1,7 @@
 import Router from 'vue-router'
 import HomePage from './components/Accueil.vue'
-import AboutPage from './components/Header.vue'
-import ExamplePage from './components/profilView.vue'
+import AboutPage from './components/reusedComponents/Header.vue'
+import ExamplePage from './components/reusedComponents/profilView.vue'
 // import messagesRoutes from '@/modules/messages/router';
 // import peopleRoutes from '@/modules/people/router';
 
