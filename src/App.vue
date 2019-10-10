@@ -17,6 +17,7 @@
 <script>
 import topbar from './components/reusedComponents/topbar'
 import footerView from './components/reusedComponents/Footer'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -24,7 +25,9 @@ export default {
     topbar, footerView
   },
   data: () => ({
-    offsetTop: 0
+    offsetTop: 0,
+    wholeResponse: '',
+    token: ''
   }),
   methods: {
     profil: () => {
@@ -37,6 +40,30 @@ export default {
     onScroll (e) {
       alert('scroll')
       this.offsetTop = e.target.scrollTop
+    }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:8082/')
+      .then(response => {
+        this.wholeResponse = response.data.Search
+        localStorage.token = response
+        let d = new Date()
+        d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000))
+        let expires = 'expires=' + d.toUTCString()
+        document.cookie = 'Token=' + response.data.Token + ';' + expires + ';path=/'
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    if (localStorage.name) {
+      this.token = localStorage.token
+    }
+  },
+  watch: {
+    name (newName) {
+      localStorage.token = newName
     }
   }
 }

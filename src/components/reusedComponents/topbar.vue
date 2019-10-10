@@ -136,6 +136,7 @@
 <script>
 
 import settingsForm from './settingsForm'
+import api from '../../Services/api.js'
 
 export default {
   name: 'App',
@@ -160,7 +161,8 @@ export default {
     ],
     dialog: false,
     showSettingsModel: false,
-    value: 0
+    value: 0,
+    name: ''
   }),
   methods: {
     menuActions: function (el, i) {
@@ -177,6 +179,15 @@ export default {
     profil: function () {
       this.value = this.value + 1
       alert('profil')
+      this.$router.push('/profile')
+      api.fetchProfileData()
+        .then(response => {
+          console.log(response)
+          this.name = response
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     showSettings: function () {
       this.showSettingsModel = !this.showSettingsModel
