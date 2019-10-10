@@ -21,8 +21,8 @@ app.use(function (req, res, next) {
 
 app.get('/', function (req, res) {
   res.statusCode = 200
-  res.setHeader('Content-Type', 'text/html')
-  res.write('Hello')
+  res.setHeader('Content-Type', 'text/json')
+  res.send({ token: '12345678909876FZH2' })
   res.end()
   console.log('chemin complet')
 })
