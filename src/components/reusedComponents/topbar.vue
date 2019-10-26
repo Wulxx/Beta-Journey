@@ -13,7 +13,6 @@
       Stourney
       </v-btn>
       </v-app-bar-title>
-    <img class="mr-3" :src="require('/Users/alexendreobli/fwd_folder/first-app/src/assets/logo.png')" height="40"/>
            <v-spacer />
         <v-text-field
             label="Recherche"
