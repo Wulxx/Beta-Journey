@@ -3,31 +3,49 @@
       absolute
       color="#fcb69f"
       dark
+      fixed
       shrink-on-scroll
-      src="https://picsum.photos/1920/1080?random"
+      src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-pastel-green-solid-color-background.jpg"
       scroll-target="#scrolling-techniques-2"
       height="64px">
-    <v-app-bar-side-icon @click="drawer = !drawer"  class="white--text"></v-app-bar-side-icon>
+      <v-app-bar-nav-icon @click="leftMenuApparition = !leftleftMenuApparitionMenu" v-if="isCollapsable"></v-app-bar-nav-icon>
     <v-app-bar-title class="white--text" to="/home">
         <v-btn text color="white" to="/home">
-      Stourney
+      {{ isCollapsable }}
       </v-btn>
       </v-app-bar-title>
     <img class="mr-3" :src="require('/Users/alexendreobli/fwd_folder/first-app/src/assets/logo.png')" height="40"/>
            <v-spacer />
-        <v-text-field
-            label="Recherche"
-            solo
-            class="searchbar"
-          ></v-text-field>
-
-    <div class="flex-grow-1"></div>
-        <div class="text-center">
-              <v-menu offset-y>
+    <div class="flex-grow-1" v-if="!isCollapsable"></div>
+    <div id="barMenu" v-if="!isCollapsable">
+      <div class="text-center">
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            color="primary"
+            dark
+            icon
+            v-on="on"
+          >
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in notifications"
+            :key="index"
+            @click="profil"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+    </v-menu>
+    <v-menu offset-y>
       <template v-slot:activator="{ on }">
         <v-btn
           color="primary"
           dark
+          text
           v-on="on"
           @click="dialog = !dialog"
         >
@@ -35,11 +53,12 @@
         </v-btn>
       </template>
     </v-menu>
-      <v-menu offset-y>
+    <v-menu offset-y>
       <template v-slot:activator="{ on }">
         <v-btn
           color="primary"
           dark
+          icon
           v-on="on"
         >
         <v-icon>mdi-bell</v-icon>
@@ -54,12 +73,13 @@
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+  </v-menu>
         <v-menu offset-y>
       <template v-slot:activator="{ on }">
         <v-btn
           color="primary"
           dark
+          icon
           v-on="on"
         >
          <v-icon>mdi-account-multiple</v-icon>
@@ -85,6 +105,7 @@
         <v-btn
           color="primary"
           dark
+          icon
           v-on="on"
         >
           <v-icon>mdi-account</v-icon>
@@ -97,7 +118,7 @@
           @click="menuActions(item,index)"
           to:item.route
         >
-          <v-list-item-title>{{ item.title + value}}</v-list-item-title>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
             <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -130,6 +151,7 @@
           </v-card>
         </v-dialog>
           <settingsForm v-model="showSettingsModel"></settingsForm>
+          </div>
   </v-app-bar>
 
   </template>
@@ -137,6 +159,8 @@
 
 import settingsForm from './settingsForm'
 import api from '../../Services/api.js'
+import axios from 'axios'
+import router from '../../router/index'
 
 export default {
   name: 'App',
@@ -162,8 +186,22 @@ export default {
     dialog: false,
     showSettingsModel: false,
     value: 0,
-    name: ''
+    name: '',
+    window: {
+      width: 0,
+      height: 0
+    },
+    isCollapsable: false,
+    leftMenu: false,
+    leftMenuApparition: false
   }),
+  created () {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.handleResize)
+  },
   methods: {
     menuActions: function (el, i) {
       if (i === 0) {
@@ -176,9 +214,14 @@ export default {
         this.deco()
       }
     },
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+      this.isCollapsable = this.window.width < this.window.height
+      this.leftMenu = this.window.width < this.window.height
+    },
     profil: function () {
       this.value = this.value + 1
-      alert('profil')
       this.$router.push('/profile')
       api.fetchProfileData()
         .then(response => {
@@ -193,8 +236,23 @@ export default {
       this.showSettingsModel = !this.showSettingsModel
     },
     deco: function () {
-      alert('deconnecté')
+      axios.post('http://localhost:8082/deco', {
+      }).then(function (response) {
+        console.log(response)
+        if (response.status === 200) {
+          router.push('/')
+        }
+      })
+        .catch(function (error) {
+          console.log(error)
+        })
+      console.log({
+        name: this.name
+      })
     }
+  },
+  props: {
+    isConnected: Boolean
   }
 }
 </script>

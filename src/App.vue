@@ -1,28 +1,27 @@
 <template>
 <v-app light>
-  <topbar id="topBar"/>
+  <v-app-bar
+  :hide-on-scroll="true">
+  <topbar id="topBar" isConnected="true"/>>
+  </v-app-bar>
+  <topBar></topBar>
+  <v-content>
        <v-row id="content" justify="center" align="center">
-      <v-subheader>Offset Top</v-subheader>
-      {{ offsetTop }}
     </v-row>
     <v-row v-scroll:#scroll-target="onScroll">
         <router-view></router-view>
     </v-row>
-  <v-footer app>
-      <footerView/>
-  </v-footer>
+  </v-content>
   </v-app>
 </template>
 
 <script>
 import topbar from './components/reusedComponents/topbar'
-import footerView from './components/reusedComponents/Footer'
-import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    topbar, footerView
+    topbar
   },
   data: () => ({
     offsetTop: 0,
@@ -43,22 +42,8 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get('http://localhost:8082/')
-      .then(response => {
-        this.wholeResponse = response.data.Search
-        localStorage.token = response
-        let d = new Date()
-        d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000))
-        let expires = 'expires=' + d.toUTCString()
-        document.cookie = 'Token=' + response.data.Token + ';' + expires + ';path=/'
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
-    if (localStorage.name) {
-      this.token = localStorage.token
+    if (localStorage.token != null) {
+      console.log('une session est déjà ouverte')
     }
   },
   watch: {
@@ -69,13 +54,7 @@ export default {
 }
 </script>
 <style>
-#topBar{
-position: fixed;
-z-index: 1;
-width: 100%;
-}
+
 #content {
-  padding: 16px;
-  margin-top: 100%;
 }
 </style>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from '../components/Accueil.vue'
+import App from '../components/simplePages/welcomeView.vue'
+import Accueil from '../components/Accueil.vue'
 import profileView from '../components/reusedComponents/profilView.vue'
 
 Vue.use(VueRouter)
@@ -9,8 +10,13 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'Accueil',
+      name: 'connexion',
       component: App
+    },
+    {
+      path: '/Accueil',
+      name: 'Accueil',
+      component: Accueil
     },
     {
       path: '*',
