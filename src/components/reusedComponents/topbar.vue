@@ -4,9 +4,7 @@
       color="#fcb69f"
       dark
       fixed
-      shrink-on-scroll
       src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-pastel-green-solid-color-background.jpg"
-      scroll-target="#scrolling-techniques-2"
       height="64px">
       <v-app-bar-nav-icon @click="leftMenuApparition = !leftleftMenuApparitionMenu" v-if="isCollapsable"></v-app-bar-nav-icon>
     <v-app-bar-title class="white--text" to="/home">
@@ -47,7 +45,7 @@
           dark
           text
           v-on="on"
-          @click="dialog = !dialog"
+          @click="sendNewPicture"
         >
           <v-icon>mdi-plus-circle</v-icon>   Ajouter une image
         </v-btn>
@@ -132,9 +130,9 @@
               <v-card-title>
                 Ajouter une image
               </v-card-title>
-              <v-text-field label="File name"></v-text-field>
+              <v-text-field label="File name" v-model="postName"></v-text-field>
               <v-text-field label="Lieu"></v-text-field>
-              <v-text-field label="Stourney"></v-text-field>
+              <v-text-field label="Stourney" v-model="caption"></v-text-field>
                <v-file-input
                   label="File input"
                   filled
@@ -142,6 +140,8 @@
                   multiple
                   accept="image/*"
                   prepend-icon="mdi-camera"
+                  v-model="imageAdded"
+                  @change="onFileChange"
                 ></v-file-input>
             </v-card-text>
             <v-card-actions>
@@ -186,14 +186,18 @@ export default {
     dialog: false,
     showSettingsModel: false,
     value: 0,
+    imageAdded: null,
+    postName: '',
     name: '',
+    caption: '',
     window: {
       width: 0,
       height: 0
     },
     isCollapsable: false,
     leftMenu: false,
-    leftMenuApparition: false
+    leftMenuApparition: false,
+    formData: new FormData()
   }),
   created () {
     window.addEventListener('resize', this.handleResize)
@@ -203,6 +207,15 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    onFileChange (e) {
+      var files = e.target.files || e.dataTransfer.files
+      console.log(e)
+      if (files.length > 0) {
+        for (var i = 0; i < files.length; i++) {
+          this.imageAdded = files
+        }
+      }
+    },
     menuActions: function (el, i) {
       if (i === 0) {
         this.profil()
@@ -213,6 +226,23 @@ export default {
       if (i === 2) {
         this.deco()
       }
+    },
+    sendNewPicture () {
+      this.dialog = !this.dialog
+      axios.post('http://localhost:8082/newPost', {
+        photo: this.imageAdded,
+        name: this.postName,
+        caption: this.caption,
+        form: self.formData
+      }).then(function (response) {
+        console.log(response)
+      })
+        .catch(function (error) {
+          console.log(error)
+        })
+      console.log({
+        name: this.name
+      })
     },
     handleResize () {
       this.window.width = window.innerWidth

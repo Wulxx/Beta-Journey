@@ -87,6 +87,11 @@ export default {
 }
 </script>
 <style scoped>
+
+#superpose {
+color : white;
+font-size: large;
+}
 #collectionContainer {
   margin-left: 50px;
 }

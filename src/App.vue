@@ -1,7 +1,6 @@
 <template>
 <v-app light>
-  <v-app-bar
-  :hide-on-scroll="true">
+  <v-app-bar>
   <topbar id="topBar" isConnected="true"/>>
   </v-app-bar>
   <topBar></topBar>

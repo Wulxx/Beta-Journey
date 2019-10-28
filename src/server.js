@@ -1,5 +1,6 @@
 const express = require('express')
 const dbEntry = require('./Services/DbConnexion')
+const upload = require('./Services/dataProcessing')
 const tokenGenerator = require('rand-token').uid
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
@@ -81,58 +82,11 @@ app.post('/newUser', async function (req, res) {
   }
 })
 
-app.post('/newCaption', async function (req, res) {
-  console.log(req.body)
-  var token = getAToken()
-  console.log(token)
-  const isAivaible = await dbEntry.UsernamaAvaible(req.body.name)
-  console.log(isAivaible)
-  if (isAivaible) {
-    if (dbEntry.createProfile(req.body.name, req.body.mail, req.body.password, token)) {
-      res.statusCode = 200
-      res.setHeader('Content-Type', 'text/text')
-      res.send('OK')
-      res.end()
-    } else {
-      res.send('UserName Already Exist')
-    }
-  }
-})
-
-app.post('/newAlbum', async function (req, res) {
-  console.log(req.body)
-  var token = getAToken()
-  console.log(token)
-  const isAivaible = await dbEntry.UsernamaAvaible(req.body.name)
-  console.log(isAivaible)
-  if (isAivaible) {
-    if (dbEntry.createProfile(req.body.name, req.body.mail, req.body.password, token)) {
-      res.statusCode = 200
-      res.setHeader('Content-Type', 'text/text')
-      res.send('OK')
-      res.end()
-    } else {
-      res.send('UserName Already Exist')
-    }
-  }
-})
-
 app.post('/newPost', async function (req, res) {
   console.log(req.body)
-  var token = getAToken()
-  console.log(token)
-  const isAivaible = await dbEntry.UsernamaAvaible(req.body.name)
-  console.log(isAivaible)
-  if (isAivaible) {
-    if (dbEntry.createProfile(req.body.name, req.body.mail, req.body.password, token)) {
-      res.statusCode = 200
-      res.setHeader('Content-Type', 'text/text')
-      res.send('OK')
-      res.end()
-    } else {
-      res.send('UserName Already Exist')
-    }
-  }
+  const newPost = await upload.newPost(req, res)
+  res = newPost
+  console.log('la réponse' + res)
 })
 
 app.post('/connexion', async function (req, res) {
