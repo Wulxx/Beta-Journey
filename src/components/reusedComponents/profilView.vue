@@ -1,9 +1,8 @@
 <template>
     <v-container class="pa-2"
       fluid>
-      <v-card max-height="40%">
         <v-img id="pc" class="superpose" :src="'https://cdn.pixabay.com/photo/2019/09/27/20/40/houses-4509404_960_720.jpg'" max-height="400px" gradient="rgba(0,0,0,.0),rgba(0,0,0,.0), rgba(0,0,0,.7)">
-        <v-img id="pp" class="superpose" :src="'https://cdn.pixabay.com/photo/2019/09/08/15/08/owl-4461236__340.jpg'" max-height="250px" max-width="250px" :aspect-ratio="4/4">
+        <v-img id="pp" class="superpose" :src="'https://cdn.pixabay.com/photo/2019/09/08/15/08/owl-4461236__340.jpg'" max-height="200px" max-width="200px" :aspect-ratio="4/4">
         </v-img>
         <v-spacer></v-spacer>
         <v-label class="superpose" :color="'white'" >Dernier Voyage : Hollande</v-label>
@@ -34,7 +33,6 @@
             </v-card-actions>
           </v-card>
         </v-card-actions>
-      </v-card>
       <feed/>
     </v-container>
 </template>
@@ -96,9 +94,11 @@ font-size: large;
   margin-left: 50px;
 }
 #pp {
-  border-bottom-right-radius: 10%;
+  border-radius: 50%;
   border-style: solid;
   border-width: 5;
+  margin-left: 37.5%;
+  margin-top: 20px;
   border-color: black;
   height: 50;
   width: 50;

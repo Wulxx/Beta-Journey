@@ -1,15 +1,11 @@
 <template>
 <v-app light>
-  <v-app-bar>
-  <topbar id="topBar" isConnected="true"/>>
+  <v-content>
+      <v-app-bar>
+  <topbar id="topBar" :isConnected="isCOnnected"/>>
   </v-app-bar>
   <topBar></topBar>
-  <v-content>
-       <v-row id="content" justify="center" align="center">
-    </v-row>
-    <v-row v-scroll:#scroll-target="onScroll">
         <router-view></router-view>
-    </v-row>
   </v-content>
   </v-app>
 </template>
@@ -25,7 +21,8 @@ export default {
   data: () => ({
     offsetTop: 0,
     wholeResponse: '',
-    token: ''
+    token: '',
+    isCOnnected: false
   }),
   methods: {
     profil: () => {

@@ -14,7 +14,7 @@
       </v-app-bar-title>
     <img class="mr-3" :src="require('/Users/alexendreobli/fwd_folder/first-app/src/assets/logo.png')" height="40"/>
            <v-spacer />
-    <div class="flex-grow-1" v-if="!isCollapsable"></div>
+    <div class="flex-grow-1" v-if="!isCollapsable && isConnected"></div>
     <div id="barMenu" v-if="!isCollapsable">
       <div class="text-center">
       <v-menu offset-y>
@@ -271,6 +271,7 @@ export default {
         console.log(response)
         if (response.status === 200) {
           router.push('/')
+          this.isConnected = false
         }
       })
         .catch(function (error) {
