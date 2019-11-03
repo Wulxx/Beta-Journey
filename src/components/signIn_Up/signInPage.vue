@@ -6,11 +6,11 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Sign Up</v-toolbar-title>
                 <v-spacer> <v-spacer />
-           
+
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  
+
                   <v-text-field
                     label="Email" name="email"
                     prepend-icon="person"
@@ -35,19 +35,21 @@
 
 </template>
 
-<script> 
+<script>
 
 export default {
 
-  data() {
+  data () {
     return {
-      email:null,
-      password:null
+      email: null,
+      password: null
     }
-  }, 
+  },
   methods: {
-    enter()
+    enter () {
+
+    }
   }
 
 }
-</script> 
+</script>

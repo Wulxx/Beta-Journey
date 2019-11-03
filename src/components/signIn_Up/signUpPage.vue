@@ -52,9 +52,6 @@ export default {
   },
   methods: {
     registerUser () {
-
-      
-
     }
   }
 }
