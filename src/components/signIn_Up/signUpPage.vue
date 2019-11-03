@@ -1,35 +1,60 @@
 <template>
-    <v-card>
-        <v-card-title>
-            <h2> Sign up to discover a new world </h2>
-            <v-form class="px-3">
+  <v-layout align-center justify-center>
+        <v-row align="center" justify="center" >
+          <v-col cols="12" sm="8" md="4">
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>Sign Up</v-toolbar-title>
+                <v-spacer> <v-spacer />
 
-                <v-text-field label="First Name" v-model="firstName"></v-text-field>
-                <v-text-field label="Last Name" v-model="lastName"></v-text-field>                    <v-text-field label="First Name" v-model="firstName"></v-text-field>
-                <v-text-field label="Pseudo" v-model="pseudo"></v-text-field>
-                <v-text-field label="Password" v-model="password"></v-text-field>
-                <v-btn flat class="success mx-0 mt-3" @click="submit"> Sign Up </v-btn>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field
+                    label="Login" name="login"
+                    prepend-icon="person"
+                    type="text"
+                  />
+                  <v-text-field
+                    label="Email" name="email"
+                    prepend-icon="person"
+                    type="text"
+                  />
 
-            </v-form>
+                  <v-text-field
+                    id="password"
+                    label="Password"
+                    name="password"
+                    prepend-icon="lock"
+                    type="password"
+                   />
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer> <v-spacer />
+                <v-btn color="primary" @click="registerUser">Sign Up </v-btn>
+              </v-card-actions>
+            </v-card>
+      </v-layout>
 
-        </v-card-title>
-
-    </v-card>
 </template>
 
 <script>
+
 export default {
+
   data () {
     return {
-      firstName: '',
-      lastName: '',
-      pseudo: '',
-      password: ''
+      login: null,
+      email: null,
+      password: null
     }
   },
   methods: {
-    submit () {
-      console.log(this.firstName, this.lastName, this.pseudo, this.password)
+    registerUser () {
+
+      
+
     }
   }
 }

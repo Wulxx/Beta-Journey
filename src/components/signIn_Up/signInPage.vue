@@ -1,31 +1,53 @@
 <template>
-    <v-card>
-        <v-card-title>
-            <h2> Sign in to travel with us </h2>
-            <v-form class="px-3">
-                <v-text-field label="Pseudo" v-model="pseudo"></v-text-field>
-                <v-text-field label="Password" v-model="password"></v-text-field>
-                 <v-btn flat class="success mx-0 mt-3"> Sign In </v-btn>
+  <v-layout align-center justify-center>
+        <v-row align="center" justify="center" >
+          <v-col cols="12" sm="8" md="4">
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>Sign Up</v-toolbar-title>
+                <v-spacer> <v-spacer />
+           
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  
+                  <v-text-field
+                    label="Email" name="email"
+                    prepend-icon="person"
+                    type="text"
+                  />
 
-            </v-form>
+                  <v-text-field
+                    id="password"
+                    label="Password"
+                    name="password"
+                    prepend-icon="lock"
+                    type="password"
+                   />
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer> <v-spacer />
+                <v-btn color="primary" @click="enter">Sign In</v-btn>
+              </v-card-actions>
+            </v-card>
+      </v-layout>
 
-        </v-card-title>
-
-    </v-card>
 </template>
 
-<script>
+<script> 
+
 export default {
-  data () {
+
+  data() {
     return {
-      pseudo: '',
-      password: ''
+      email:null,
+      password:null
     }
-  },
+  }, 
   methods: {
-    submit () {
-      console.log(this.pseudo, this.password)
-    }
+    enter()
   }
+
 }
-</script>
+</script> 
