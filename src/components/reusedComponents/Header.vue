@@ -1,29 +1,16 @@
 <template>
-  <v-carousel>
-    <v-carousel-item
-      v-for="slide in Slider"
-      :key="slide.color"
-      :title="slide"
-      interval=6000
-    >
-      <v-sheet
-        :color="slide.color"
-        height="100%"
-        :title="'title'"
-        :src="slide.src"
-      >
-        <v-img class="fill-height"
-          align="center"
-          justify="center"
-          :src="slide.src">
-          <div class="display-3"
-          align="center"
-          justify="center">{{slide.title}}</div>
-          </v-img>
-
-      </v-sheet>
-    </v-carousel-item>
-  </v-carousel>
+        <v-carousel
+        hide-delimiters="true"
+        cycle="true">
+          <v-carousel-item :key="i" v-for="i in 5">
+            <v-layout row>
+              <v-flex xs4 :key="j" v-for="j in 3">
+                <v-parallax src="https://cdn.pixabay.com/photo/2019/09/30/18/41/taxi-4516525_1280.jpg">
+                </v-parallax>
+              </v-flex>
+            </v-layout>
+          </v-carousel-item>
+        </v-carousel>
 </template>
 
 <script>

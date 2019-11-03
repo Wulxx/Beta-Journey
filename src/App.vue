@@ -1,30 +1,28 @@
 <template>
 <v-app light>
-  <topbar id="topBar"/>
-       <v-row id="content" justify="center" align="center">
-      <v-subheader>Offset Top</v-subheader>
-      {{ offsetTop }}
-    </v-row>
-    <v-row v-scroll:#scroll-target="onScroll">
+  <v-content>
+      <v-app-bar>
+  <topbar id="topBar" :isConnected="isCOnnected"/>>
+  </v-app-bar>
+  <topBar></topBar>
         <router-view></router-view>
-    </v-row>
-  <v-footer app>
-      <footerView/>
-  </v-footer>
+  </v-content>
   </v-app>
 </template>
 
 <script>
 import topbar from './components/reusedComponents/topbar'
-import footerView from './components/reusedComponents/Footer'
 
 export default {
   name: 'App',
   components: {
-    topbar, footerView
+    topbar
   },
   data: () => ({
-    offsetTop: 0
+    offsetTop: 0,
+    wholeResponse: '',
+    token: '',
+    isCOnnected: false
   }),
   methods: {
     profil: () => {
@@ -38,17 +36,21 @@ export default {
       alert('scroll')
       this.offsetTop = e.target.scrollTop
     }
+  },
+  mounted () {
+    if (localStorage.token != null) {
+      console.log('une session est déjà ouverte')
+    }
+  },
+  watch: {
+    name (newName) {
+      localStorage.token = newName
+    }
   }
 }
 </script>
 <style>
-#topBar{
-position: fixed;
-z-index: 1;
-width: 100%;
-}
+
 #content {
-  padding: 16px;
-  margin-top: 100%;
 }
 </style>
