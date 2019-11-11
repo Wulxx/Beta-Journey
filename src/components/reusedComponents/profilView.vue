@@ -1,5 +1,5 @@
 <template>
-    <v-container class="pa-2"
+    <v-card class="pa-2"
       fluid>
         <v-img id="pc" class="superpose" :src="'https://cdn.pixabay.com/photo/2019/09/27/20/40/houses-4509404_960_720.jpg'" max-height="400px" gradient="rgba(0,0,0,.0),rgba(0,0,0,.0), rgba(0,0,0,.7)">
         <v-img id="pp" class="superpose" :src="'https://cdn.pixabay.com/photo/2019/09/08/15/08/owl-4461236__340.jpg'" max-height="200px" max-width="200px" :aspect-ratio="4/4">
@@ -8,9 +8,9 @@
         <v-label class="superpose" :color="'white'" >Dernier Voyage : Hollande</v-label>
         </v-img>
         <v-card-title>
-        <v-label class="superpose" >nom d'utilisateur</v-label>
+        <v-label class="superpose" >Nom d'utilisateur</v-label>
         <v-spacer></v-spacer>
-        <v-btn class="superpose" >s'abonner</v-btn>
+        <v-btn class="superpose" >S'abonner</v-btn>
         </v-card-title>
         <v-card-text>
         <v-label class="superpose" >Description</v-label>
@@ -34,7 +34,7 @@
           </v-card>
         </v-card-actions>
       <feed/>
-    </v-container>
+    </v-card>
 </template>
 
 <script>
@@ -117,7 +117,6 @@ font-size: large;
    position: relative;
    background-size: cover;
   width: 100%;
-  padding-bottom: 16.25%;
   background-image:url();
 }
 </style>
